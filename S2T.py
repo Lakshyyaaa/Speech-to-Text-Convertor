@@ -7,19 +7,14 @@ def speech_to_text():
     # Use the microphone as source for input
     with sr.Microphone() as source:
         print("Adjusting for ambient noise... Please wait.")
-        # Adjust the recognizer sensitivity to ambient noise
         r.adjust_for_ambient_noise(source, duration=1)
         print("Listening... Please speak now.")
 
-        # Listen for the user's input
         audio = r.listen(source)
-
         try:
-            # Use Google Web Speech API to recognize the speech
-            text = r.recognize_google(audio, language='en')  # For Spanish, use 'es'
-            print("You said: " + text)
+            text = r.recognize_google(audio, language='en')  # Any language can be used by changing the language = 'en' with the code of language                              
+            print("You said: " + text)  # A file for other language codes has been provided in the repository
 
-            # Save the recognized text to a file
             with open("recognized_text.txt", "w") as file:
                 file.write(text)
             print("Text has been saved to 'recognized_text.txt'.")
@@ -31,5 +26,4 @@ def speech_to_text():
             print("Could not understand the audio")
 
 
-# Call the function
 speech_to_text()
